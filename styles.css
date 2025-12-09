@@ -1,0 +1,33 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  margin: 0;
+  background: #050505;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #eee;
+}
+
+#gameContainer {
+  text-align: center;
+}
+
+canvas {
+  border: 2px solid #555;
+  background: #000;
+  display: block;
+  margin: 0 auto 10px auto;
+}
+
+#gameHint {
+  font-size: 13px;
+  color: #888;
+}
+
