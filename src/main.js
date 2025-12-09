@@ -1,5 +1,5 @@
 import { GAME_CONFIG } from "./config.js";
-import { InputManager } from "./core/input.js";
+import { TouchInput } from "./core/TouchInput.js";
 import { AudioManager } from "./core/audio.js";
 import { Engine } from "./core/engine.js";
 
@@ -15,7 +15,7 @@ canvas.width = GAME_CONFIG.width;
 canvas.height = GAME_CONFIG.height;
 
 // تهيئة الأنظمة الأساسية
-const input = new InputManager();
+const input = new TouchInput(canvas);
 const audio = new AudioManager();
 const engine = new Engine(ctx, GAME_CONFIG.width, GAME_CONFIG.height, input, audio);
 
@@ -54,3 +54,28 @@ menuScene = new MenuScene(engine, startGame);
 // بدء اللعبة من القائمة
 engine.setScene(menuScene);
 engine.start();
+
+// إعداد أزرار اللمس الاختيارية
+const touchControls = document.getElementById("touchControls");
+if (touchControls) {
+  const leftBtn = touchControls.querySelector('[data-direction="left"]');
+  const rightBtn = touchControls.querySelector('[data-direction="right"]');
+
+  const bindButton = (btn, direction) => {
+    if (!btn) return;
+    const key = direction === "left" ? "ArrowLeft" : "ArrowRight";
+    btn.addEventListener("pointerdown", (e) => {
+      e.preventDefault();
+      input.startVirtualDirection(key);
+    });
+    ["pointerup", "pointerleave", "pointercancel", "pointerout"].forEach((evt) => {
+      btn.addEventListener(evt, (e) => {
+        e.preventDefault();
+        input.endVirtualDirection(key);
+      });
+    });
+  };
+
+  bindButton(leftBtn, "left");
+  bindButton(rightBtn, "right");
+}
