@@ -7,7 +7,13 @@
 </head>
 <body>
   <div id="gameContainer">
-    <canvas id="gameCanvas" width="800" height="600"></canvas>
+    <div id="canvasWrapper">
+      <canvas id="gameCanvas" width="800" height="600"></canvas>
+      <div id="touchControls" aria-hidden="true">
+        <button class="touch-btn" data-direction="left" aria-label="تحريك لليسار">◀</button>
+        <button class="touch-btn" data-direction="right" aria-label="تحريك لليمين">▶</button>
+      </div>
+    </div>
     <div id="gameHint">
       إذا لم تظهر اللعبة، تأكد من فتح الملف عبر متصفح (يفضل Chrome/Edge)
       وأنك لم تفتحه من داخل محرر فقط.
